@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:auth_api_dopave_app/controllers/auth_controller.dart';
-import 'package:auth_api_dopave_app/widgets/custom_button.dart';
+import 'package:auth_api_dopave_app/features/auth/controller/auth_controller.dart';
+import 'package:auth_api_dopave_app/custom_widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';

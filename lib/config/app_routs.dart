@@ -1,10 +1,15 @@
-import 'package:auth_api_dopave_app/controllers/auth_controller.dart';
-import 'package:auth_api_dopave_app/views/auth/forgot_password_screen.dart';
-import 'package:auth_api_dopave_app/views/auth/login_screen.dart';
-import 'package:auth_api_dopave_app/views/auth/otp_verification_screen.dart';
-import 'package:auth_api_dopave_app/views/auth/phone_input_screen.dart';
-import 'package:auth_api_dopave_app/views/auth/registration_screen.dart';
-import 'package:auth_api_dopave_app/views/home/home_screen.dart';
+import 'package:auth_api_dopave_app/features/articles/view/screens/article_webview_screen.dart';
+import 'package:auth_api_dopave_app/features/articles/view/screens/articles_screen.dart';
+import 'package:auth_api_dopave_app/features/auth/controller/auth_controller.dart';
+import 'package:auth_api_dopave_app/features/auth/view/screens/forgot_password_screen.dart';
+import 'package:auth_api_dopave_app/features/auth/view/screens/login_screen.dart';
+import 'package:auth_api_dopave_app/features/auth/view/screens/otp_verification_screen.dart';
+import 'package:auth_api_dopave_app/features/auth/view/screens/phone_input_screen.dart';
+import 'package:auth_api_dopave_app/features/auth/view/screens/registration_screen.dart';
+import 'package:auth_api_dopave_app/features/auth/view/widgets/user_details_widget.dart';
+import 'package:auth_api_dopave_app/features/gold_price/view/goldprice_screen.dart';
+import 'package:auth_api_dopave_app/features/home/view/screens/home_screen.dart';
+import 'package:auth_api_dopave_app/features/matches/view/screens/matches_screen.dart';
 import 'package:get/get.dart';
 
 class AppRouts {
@@ -14,7 +19,12 @@ class AppRouts {
     GetPage(name: '/register', page: () => RegistrationScreen()),
     GetPage(name: '/login', page: () => LoginScreen()),
     GetPage(name: '/forgot-password', page: () => ForgotPasswordScreen()),
+    GetPage(name: '/matches_screen', page: () => MatchesScreen()),
+    GetPage(name: '/about', page: () => UserDetailsWidget()),
     GetPage(name: '/home', page: () => HomeScreen()),
+    GetPage(name: '/articles', page: () => ArticlesScreen()),
+    GetPage(name: '/article-webview', page: () => const ArticleWebViewScreen()),
+    GetPage(name: '/gold_Prices', page: () => const GoldPriceScreen()),
   ];
 
   // Determine initial route based on authentication status

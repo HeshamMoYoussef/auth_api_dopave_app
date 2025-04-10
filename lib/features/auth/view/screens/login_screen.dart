@@ -1,8 +1,9 @@
-import 'package:auth_api_dopave_app/controllers/auth_controller.dart';
-import 'package:auth_api_dopave_app/controllers/user_controller.dart';
-import 'package:auth_api_dopave_app/widgets/custom_button.dart';
-import 'package:auth_api_dopave_app/widgets/custom_text_field.dart';
-import 'package:auth_api_dopave_app/widgets/phone_input_widget.dart';
+import 'package:auth_api_dopave_app/features/auth/controller/auth_controller.dart';
+import 'package:auth_api_dopave_app/features/matches/controller/matches_controller.dart';
+import 'package:auth_api_dopave_app/features/auth/controller/user_controller.dart';
+import 'package:auth_api_dopave_app/custom_widgets/custom_button.dart';
+import 'package:auth_api_dopave_app/features/auth/view/widgets/custom_text_field.dart';
+import 'package:auth_api_dopave_app/features/auth/view/widgets/phone_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,13 +12,17 @@ class LoginScreen extends GetView<AuthController> {
 
   final _formKey = GlobalKey<FormState>();
   final AuthController _authController = Get.find<AuthController>();
-    final UserController _userController = Get.find<UserController>();
+  final UserController _userController = Get.find<UserController>();
+  final MatchesController _matchesController = Get.find<MatchesController>();
 
   final RxString _phoneNumber = ''.obs;
   final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    Get.find<AuthController>();
+    Get.find<UserController>();
+    Get.find<MatchesController>();
     return Scaffold(
       appBar: AppBar(title: const Text('تسجيل الدخول'), centerTitle: true),
       body: SafeArea(
@@ -111,6 +116,7 @@ class LoginScreen extends GetView<AuthController> {
                             _passwordController.text,
                           );
                           _userController.getUserProfile();
+                          _matchesController.getMatches();
                           if (result) {
                             Get.offAllNamed('/home');
                           }

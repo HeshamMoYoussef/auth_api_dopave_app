@@ -12,4 +12,8 @@ class ApiConstants {
   static const String updateProfile = '/api/user/update/profile';
   static const String logout = '/api/user/logout';
   static const String deleteUser = '/api/user/delete';
+  static const String matchesEndpoint = '/api/matches';
+  static const String matchDetailsEndpoint = '/api/match/info/';
+  static const String articlesEndpoint = '/api/articles';
+  static const String goldPricesEndpoint = '/api/gold';
 }

@@ -2,6 +2,8 @@ class AppConstants {
   // Storage keys
   static const String tokenKey = 'auth_token';
   static const String userDataKey = 'user_data';
+  static const String matchesDataKey = 'matches_data';
+  static const String articlesDataKey = 'articles_data';
 
   // App messages
   static const String networkError = 'تحقق من اتصالك بالإنترنت';

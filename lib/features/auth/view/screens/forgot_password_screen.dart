@@ -1,12 +1,12 @@
-import 'package:auth_api_dopave_app/controllers/auth_controller.dart';
+import 'package:auth_api_dopave_app/features/auth/controller/auth_controller.dart';
 import 'package:auth_api_dopave_app/utils/validators.dart';
-import 'package:auth_api_dopave_app/widgets/custom_button.dart';
-import 'package:auth_api_dopave_app/widgets/phone_input_widget.dart';
+import 'package:auth_api_dopave_app/custom_widgets/custom_button.dart';
+import 'package:auth_api_dopave_app/features/auth/view/widgets/phone_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PhoneInputScreen extends GetView<AuthController> {
-  PhoneInputScreen({super.key});
+class ForgotPasswordScreen extends GetView<AuthController> {
+  ForgotPasswordScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
   final AuthController _authController = Get.find<AuthController>();
@@ -15,7 +15,10 @@ class PhoneInputScreen extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('تسجيل الدخول'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('استعادة كلمة المرور'),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -27,15 +30,16 @@ class PhoneInputScreen extends GetView<AuthController> {
                 const SizedBox(height: 20),
                 const Center(
                   child: Text(
-                    'أدخل رقم الهاتف',
+                    'استعادة كلمة المرور',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(height: 12),
                 const Center(
                   child: Text(
-                    'سنرسل لك رمز التحقق عبر رسالة نصية',
+                    'أدخل رقم الهاتف وسنرسل لك كلمة مرور جديدة',
                     style: TextStyle(fontSize: 16, color: Colors.grey),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 const SizedBox(height: 40),
@@ -60,14 +64,31 @@ class PhoneInputScreen extends GetView<AuthController> {
                 ),
                 Obx(
                   () => CustomButton(
-                    text: 'متابعة',
+                    text: 'إرسال',
                     isLoading: _authController.isLoading.value,
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        final result = await _authController
-                            .sendVerificationCode(_phoneNumber.value);
+                        final result = await _authController.forgotPassword(
+                          _phoneNumber.value,
+                        );
                         if (result) {
-                          Get.toNamed('/otp-verification');
+                          Get.dialog(
+                            AlertDialog(
+                              title: const Text('تم'),
+                              content: const Text(
+                                'تم إرسال كلمة مرور جديدة إلى هاتفك',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Get.back();
+                                    Get.offNamed('/login');
+                                  },
+                                  child: const Text('موافق'),
+                                ),
+                              ],
+                            ),
+                          );
                         }
                       }
                     },
@@ -78,12 +99,12 @@ class PhoneInputScreen extends GetView<AuthController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'لديك حساب بالفعل؟',
+                      'تذكرت كلمة المرور؟',
                       style: TextStyle(fontSize: 16),
                     ),
                     TextButton(
                       onPressed: () {
-                        Get.toNamed('/login');
+                        Get.back();
                       },
                       child: const Text(
                         'تسجيل الدخول',

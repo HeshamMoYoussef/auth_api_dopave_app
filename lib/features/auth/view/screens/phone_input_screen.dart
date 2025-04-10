@@ -1,12 +1,12 @@
-import 'package:auth_api_dopave_app/controllers/auth_controller.dart';
+import 'package:auth_api_dopave_app/features/auth/controller/auth_controller.dart';
 import 'package:auth_api_dopave_app/utils/validators.dart';
-import 'package:auth_api_dopave_app/widgets/custom_button.dart';
-import 'package:auth_api_dopave_app/widgets/phone_input_widget.dart';
+import 'package:auth_api_dopave_app/custom_widgets/custom_button.dart';
+import 'package:auth_api_dopave_app/features/auth/view/widgets/phone_input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ForgotPasswordScreen extends GetView<AuthController> {
-  ForgotPasswordScreen({super.key});
+class PhoneInputScreen extends GetView<AuthController> {
+  PhoneInputScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
   final AuthController _authController = Get.find<AuthController>();
@@ -15,10 +15,7 @@ class ForgotPasswordScreen extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('استعادة كلمة المرور'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('تسجيل الدخول'), centerTitle: true),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -30,16 +27,15 @@ class ForgotPasswordScreen extends GetView<AuthController> {
                 const SizedBox(height: 20),
                 const Center(
                   child: Text(
-                    'استعادة كلمة المرور',
+                    'أدخل رقم الهاتف',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(height: 12),
                 const Center(
                   child: Text(
-                    'أدخل رقم الهاتف وسنرسل لك كلمة مرور جديدة',
+                    'سنرسل لك رمز التحقق عبر رسالة نصية',
                     style: TextStyle(fontSize: 16, color: Colors.grey),
-                    textAlign: TextAlign.center,
                   ),
                 ),
                 const SizedBox(height: 40),
@@ -64,31 +60,14 @@ class ForgotPasswordScreen extends GetView<AuthController> {
                 ),
                 Obx(
                   () => CustomButton(
-                    text: 'إرسال',
+                    text: 'متابعة',
                     isLoading: _authController.isLoading.value,
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        final result = await _authController.forgotPassword(
-                          _phoneNumber.value,
-                        );
+                        final result = await _authController
+                            .sendVerificationCode(_phoneNumber.value);
                         if (result) {
-                          Get.dialog(
-                            AlertDialog(
-                              title: const Text('تم'),
-                              content: const Text(
-                                'تم إرسال كلمة مرور جديدة إلى هاتفك',
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Get.back();
-                                    Get.offNamed('/login');
-                                  },
-                                  child: const Text('موافق'),
-                                ),
-                              ],
-                            ),
-                          );
+                          Get.toNamed('/otp-verification');
                         }
                       }
                     },
@@ -99,12 +78,12 @@ class ForgotPasswordScreen extends GetView<AuthController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'تذكرت كلمة المرور؟',
+                      'لديك حساب بالفعل؟',
                       style: TextStyle(fontSize: 16),
                     ),
                     TextButton(
                       onPressed: () {
-                        Get.back();
+                        Get.toNamed('/login');
                       },
                       child: const Text(
                         'تسجيل الدخول',

@@ -1,6 +1,6 @@
 import 'package:auth_api_dopave_app/config/api_constants.dart';
 import 'package:auth_api_dopave_app/config/app_constants.dart';
-import 'package:auth_api_dopave_app/models/api_response_model.dart';
+import 'package:auth_api_dopave_app/services/api_response_model.dart';
 import 'package:auth_api_dopave_app/services/storage_service.dart';
 import 'package:auth_api_dopave_app/utils/connectivity_checker.dart';
 import 'package:dio/dio.dart';

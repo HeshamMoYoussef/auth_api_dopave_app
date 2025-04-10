@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:auth_api_dopave_app/config/api_constants.dart';
-import 'package:auth_api_dopave_app/models/user_model.dart';
+import 'package:auth_api_dopave_app/features/auth/model/user_model.dart';
 import 'package:auth_api_dopave_app/services/api_service.dart';
 import 'package:auth_api_dopave_app/services/storage_service.dart';
 import 'package:get/get.dart';
@@ -163,6 +163,7 @@ class AuthController extends GetxController {
     currentUser.value = null;
 
     isLoading.value = false;
+    update();
   }
 
   // Delete user account
@@ -189,6 +190,3 @@ class AuthController extends GetxController {
     }
   }
 }
-
-
-

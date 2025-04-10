@@ -13,19 +13,27 @@ void main() async {
   // Initialize services
   AppBindings().dependencies();
   // await initServices();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true),
       defaultTransition: Transition.fade,
       initialRoute: AppRouts.initialRoute,
       getPages: AppRouts.getPages,
+      locale: const Locale('ar', 'AR'), // Set the default locale to Arabic
+      theme: ThemeData.light(useMaterial3: true),
+      darkTheme: ThemeData.dark(useMaterial3: true),
+      themeMode:
+          box.read('theme') == null || box.read('theme') == 'light'
+              ? ThemeMode.light
+              : ThemeMode.dark, 
     );
   }
 }
